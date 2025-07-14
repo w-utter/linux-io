@@ -1,4 +1,4 @@
-use std::{io, path, thread};
+use std::{io, path};
 
 fn main() {
     let (path_1, path_2) = create_paths();
