@@ -32,7 +32,7 @@ static int dev_major = 0;
 static struct class *chardev_class = NULL;
 static struct char_device_data chardev_data[DEVICE_COUNT];
 
-static int chardev_uevent(struct device *dev, struct kobj_uevent_env *env) {
+static int chardev_uevent(const struct device *dev, struct kobj_uevent_env *env) {
     add_uevent_var(env, "DEVMODE=%#o", 0666);
     return 0;
 }
@@ -47,7 +47,7 @@ static int __init chardev_init(void) {
 
     dev_major = MAJOR(dev);
 
-    chardev_class = class_create(THIS_MODULE, DEVICE_NAME);
+    chardev_class = class_create(DEVICE_NAME);
     chardev_class->dev_uevent = chardev_uevent;
 
     for (i = 0; i < DEVICE_COUNT; i++) {
